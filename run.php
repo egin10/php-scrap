@@ -8,9 +8,11 @@ $listKota = getStringBetween($kota, 'class="inputcity">', '</select>');
 $arrKota = getKota($listKota);
 $idKota = getIdKota($arrKota, $argv[1]);
 
-//Get Waktu Sholat
+//Get Waktu Sholat Today
 $urlJadwal = "https://www.jadwalsholat.org/adzan/monthly.php?id=".$idKota;
 $jadwal = file_get_contents($urlJadwal);
 $listWaktu = getStringBetween($jadwal, '<tr class="table_highlight" align="center">', '</tr>');
 $arrWaktu = getWaktu($listWaktu);
+// json_encode($arrWaktu); parse to json
+print_r("Waktu Sholat hari ini tanggal : ".date("d-m-Y")."\n");
 print_r($arrWaktu);
