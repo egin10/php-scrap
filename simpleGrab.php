@@ -26,7 +26,7 @@ class simpleGrab
         }
     }
 
-    function hasil()
+    function result()
     {
     	if(!empty($this->res))
     		return $this->res;
