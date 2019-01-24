@@ -1,14 +1,22 @@
 <?php
 require "simpleGrab.php";
 
-if(sizeof($argv) == 1 || $argv[1] == NULL)
-{
-	echo "Use => run.php url_link(detik.com)";
-}else{
-	$url = "http://".$argv[1]."/";
-	$ref = "http://www.google.com/";
+$url = "https://www.jadwalsholat.org/adzan/monthly.php";
 
-	$run = new simpleGrab($url, $ref);
+$teks = file_get_contents($url);
 
-	echo $run->result();
+// echo $teks;
+$listKota = getStringBetween($teks, 'class="inputcity">', '</select>');
+// $kota = [];
+$kota = explode("</option>", $listKota);
+$c = count($kota)-1;
+
+for($i=0; $i<$c; $i++) {
+	$listNamaKota = explode(">", $kota[$i]);
+	$valKota = explode('"', $listNamaKota[0])[1];
+	$namaKota = $listNamaKota[1];
+	// echo $kota[$i]."\n";
+	// print_r($namaKota."\n");
+	print_r($valKota." -> ".$namaKota."\n");
 }
+// print_r($c);
