@@ -29,3 +29,29 @@ function getKota($listKota)
 
 	return $arrKota;
 }
+
+function getIdKota($arrKota, $namaKota)
+{
+	$idKota = '';
+	for($i=0; $i<count($arrKota); $i++) {
+		if($arrKota[$i][1] == $namaKota) {
+			$idKota = $arrKota[$i][0];
+		}
+	}
+
+	return $idKota;
+}
+
+function getWaktu($listWaktu)
+{
+	$ketWaktu = ['Imsyak','Subuh','Terbit','Dhuha','Dzuhur','Ashar','Magrib','Isya'];
+	$waktu = explode("</td>", $listWaktu);
+	$c = count($waktu)-1;
+	$arrWaktu = [];
+	for($i=1; $i<$c; $i++)
+	{
+		$ex = explode("d>", $waktu[$i]);
+		$arrWaktu[] = [$ketWaktu[$i-1] ,$ex[1]];
+	}
+	return $arrWaktu;
+}

@@ -1,12 +1,16 @@
 <?php
 require "simpleGrab.php";
 
-$url = "https://www.jadwalsholat.org/adzan/monthly.php";
-// https://www.jadwalsholat.org/adzan/monthly.php?id=224
-
-$teks = file_get_contents($url);
-$listKota = getStringBetween($teks, 'class="inputcity">', '</select>');
+//Get ID Kota
+$mainUrl = "https://www.jadwalsholat.org/adzan/monthly.php";
+$kota = file_get_contents($mainUrl);
+$listKota = getStringBetween($kota, 'class="inputcity">', '</select>');
 $arrKota = getKota($listKota);
+$idKota = getIdKota($arrKota, $argv[1]);
 
-// print_r($c);
-var_dump($arrKota);
+//Get Waktu Sholat
+$urlJadwal = "https://www.jadwalsholat.org/adzan/monthly.php?id=".$idKota;
+$jadwal = file_get_contents($urlJadwal);
+$listWaktu = getStringBetween($jadwal, '<tr class="table_highlight" align="center">', '</tr>');
+$arrWaktu = getWaktu($listWaktu);
+print_r($arrWaktu);
