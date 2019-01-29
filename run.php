@@ -6,7 +6,7 @@ $mainUrl = "https://www.jadwalsholat.org/adzan/monthly.php";
 $kota = file_get_contents($mainUrl);
 $listKota = getStringBetween($kota, 'class="inputcity">', '</select>');
 $arrKota = getKota($listKota);
-$idKota = getIdKota($arrKota, $argv[1]);
+$idKota = getIdKota($arrKota, strtolower($argv[1]));
 
 //Get Waktu Sholat Today
 $urlJadwal = "https://www.jadwalsholat.org/adzan/monthly.php?id=".$idKota;
